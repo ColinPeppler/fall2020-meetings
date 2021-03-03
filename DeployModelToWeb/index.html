@@ -15,6 +15,8 @@
       function submit() {
         // XMLHttpRequest (JavaScript's Request pkg) to send our POST request
         var xhr = new XMLHttpRequest();
+
+        // Prediction is received from our flask server so show it via an alert
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
             if (xhr.response == "")
@@ -35,7 +37,7 @@
         // Send our JSON object to our server's /predict endpoint for prediction
         // HINT: replace <url> with provided by the ipynb notebook, the url
         //       should end with ngrok.io (eg. http://6d8f340b.ngrok.io)
-        endpoint = '<url>' + '/predict'
+        endpoint = 'http://8e3c3c14f933.ngrok.io' + '/predict'
         xhr.open('post', endpoint, true);
         xhr.send(JSON.stringify(data));
       }
