@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="ml-4 mt-3">
+      <h1 class="font-weight-bold ml-3 mb-4">Deploy a ML Model Workshop by VT AI/ML Club</h5>
+      <div class="form-group row ml-3">
+        <input class="bg-light form-check-label mr-4 form-control-lg col-7" placeholder="Enter your sentence here" type="text" id="text-box" size="100">
+        <input class="btn btn-primary" type="submit" value="Predict" onclick="submit()">
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function submit() {
+        // XMLHttpRequest (JavaScript's Request pkg) to send our POST request
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.response == "")
+              alert("Check to make sure the flask server is running!")
+            else
+              alert(xhr.response);
+          }
+        }
+
+
+        // Get whatever is in the text box
+        var sentence = document.getElementById("text-box").value
+        const data = {
+          'sentence': sentence
+        }
+
+
+        // Send our JSON object to our server's /predict endpoint for prediction
+        // HINT: replace <url> with provided by the ipynb notebook, the url
+        //       should end with ngrok.io (eg. http://6d8f340b.ngrok.io)
+        endpoint = '<url>' + '/predict'
+        xhr.open('post', endpoint, true);
+        xhr.send(JSON.stringify(data));
+      }
+    </script>
+  </body>
+</html>
